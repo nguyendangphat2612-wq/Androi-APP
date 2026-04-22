@@ -19,6 +19,7 @@ public class SampleData {
                 "Dây chuyền",
                 "Kiểu dáng cao cấp, nổi bật vẻ đẹp quý phái.",
                 12800000
+
         ));
 
         list.add(new Product(
