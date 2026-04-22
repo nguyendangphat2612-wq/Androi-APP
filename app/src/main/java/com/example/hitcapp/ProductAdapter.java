@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.tvCategory.setText(product.getCategory());
         holder.tvPrice.setText(formatPrice(product.getPrice()));
         holder.tvBadge.setText(product.getCategory());
+        
+        // Hiển thị hình ảnh từ đối tượng Product
+        holder.imgProduct.setImageResource(product.getImage());
 
         holder.btnDetail.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
@@ -73,12 +77,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         CardView cardProduct;
+        ImageView imgProduct;
         TextView tvBadge, tvName, tvCategory, tvPrice;
         Button btnDetail, btnAddCart;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             cardProduct = itemView.findViewById(R.id.cardProduct);
+            imgProduct = itemView.findViewById(R.id.imgProduct);
             tvBadge = itemView.findViewById(R.id.tvBadge);
             tvName = itemView.findViewById(R.id.tvName);
             tvCategory = itemView.findViewById(R.id.tvCategory);

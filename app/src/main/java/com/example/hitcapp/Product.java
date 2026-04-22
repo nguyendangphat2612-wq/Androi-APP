@@ -7,12 +7,14 @@ public class Product implements Serializable {
     private String category;
     private String description;
     private int price;
+    private int image; // Thêm trường image
 
-    public Product(String name, String category, String description, int price) {
+    public Product(String name, String category, String description, int price, int image) {
         this.name = name;
         this.category = category;
         this.description = description;
         this.price = price;
+        this.image = image;
     }
 
     public String getName() {
@@ -29,5 +31,9 @@ public class Product implements Serializable {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getImage() {
+        return image;
     }
 }
