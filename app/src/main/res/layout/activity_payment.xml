@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:text="Tổng thanh toán: 0 đ"
+            android:text="Tổng thanh toán : 0 đ"
             android:textColor="#B8860B"
             android:textSize="22sp"
             android:textStyle="bold" />

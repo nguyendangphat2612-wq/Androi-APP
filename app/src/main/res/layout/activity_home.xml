@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Golden Jewelry"
+                android:text="Golden Jewelry phat"
                 android:textColor="#3D2B1F"
                 android:textSize="24sp"
                 android:textStyle="bold" />
