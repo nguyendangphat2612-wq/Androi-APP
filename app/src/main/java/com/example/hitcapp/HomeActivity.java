@@ -9,7 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -17,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageView imgCart, imgProfile;
     TextView tvHeaderCartCount;
     List<Product> productList;
+    ProductAdapter productAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +34,39 @@ public class HomeActivity extends AppCompatActivity {
         imgProfile = findViewById(R.id.imgProfile);
         tvHeaderCartCount = findViewById(R.id.tvHeaderCartCount);
 
-        productList = SampleData.getGoldProducts();
-
+        // Khởi tạo danh sách trống và adapter
+        productList = new ArrayList<>();
+        productAdapter = new ProductAdapter(this, productList);
+        
         recyclerViewProducts.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerViewProducts.setAdapter(new ProductAdapter(this, productList));
+        recyclerViewProducts.setAdapter(productAdapter);
+
+        // Gọi API lấy dữ liệu
+        fetchProducts();
 
         imgCart.setOnClickListener(v ->
                 startActivity(new Intent(HomeActivity.this, CartActivity.class)));
 
         imgProfile.setOnClickListener(v ->
                 startActivity(new Intent(HomeActivity.this, ProfileActivity.class)));
+    }
+
+    private void fetchProducts() {
+        RetrofitClient.getApiService().getProducts().enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    productList.clear();
+                    productList.addAll(response.body());
+                    productAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                // Xử lý khi lỗi kết nối ở đây (ví dụ: Toast thông báo)
+            }
+        });
     }
 
     @Override

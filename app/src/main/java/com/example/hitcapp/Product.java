@@ -7,9 +7,9 @@ public class Product implements Serializable {
     private String category;
     private String description;
     private int price;
-    private int image; // Thêm trường image
+    private String image; // Thay đổi từ int sang String để nhận URL từ API
 
-    public Product(String name, String category, String description, int price, int image) {
+    public Product(String name, String category, String description, int price, String image) {
         this.name = name;
         this.category = category;
         this.description = description;
@@ -33,7 +33,7 @@ public class Product implements Serializable {
         return price;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 }

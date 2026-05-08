@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -49,8 +51,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.tvPrice.setText(formatPrice(product.getPrice()));
         holder.tvBadge.setText(product.getCategory());
         
-        // Hiển thị hình ảnh từ đối tượng Product
-        holder.imgProduct.setImageResource(product.getImage());
+        // Sử dụng Glide để load ảnh từ URL API
+        Glide.with(context)
+                .load(product.getImage())
+                .placeholder(R.drawable.ic_launcher_background) // Ảnh mặc định khi đang load
+                .error(R.drawable.ic_launcher_background)      // Ảnh khi lỗi
+                .into(holder.imgProduct);
 
         holder.btnDetail.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
